@@ -1,0 +1,152 @@
+:root {
+  --vt-c-white: #ffffff;
+  --vt-c-white-soft: #f8f6f2;
+  --vt-c-white-mute: #e9e3d8;
+  --vt-c-white-mute-alt: #e9e3d8a0;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white-mute);
+  --vt-c-text-dark-2: var(--vt-c-white-mute-alt);
+
+  --color-background: #1b1b1b;
+  --color-background-soft: #292929;
+  --color-background-mute: #3c3836;
+
+  --color-url: #6d8dad;
+  --color-url-hover: #6d8dad7f;
+
+  --color-border: #6d8dad;
+  --color-border-hover: #6d8dad50;
+
+  --color-heading: var(--vt-c-text-dark-1);
+  --color-text: var(--vt-c-text-dark-2);
+}
+
+html {
+  margin: 0;
+  min-height: 100vh;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  line-height: 1.75;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+}
+
+a {
+  color: var(--color-url);
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-url-hover);
+}
+
+h1 {
+  text-align: center;
+}
+
+.recipe-list {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 4rem;
+}
+
+.recipe-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 24px;
+}
+
+.recipe-preview a {
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+  padding: 0.25rem 0 0.25rem 0;
+}
+
+.image-preview {
+  width: 384px;
+  height: 256px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: solid var(--color-border) 2px;
+  transition: border-color 0.2s;
+}
+
+.image-preview:hover {
+  border-color: var(--color-border-hover);
+}
+
+.recipe-container {
+  padding: 1rem;
+  margin: 0 20% 0 20%;
+}
+
+.recipe-container h2,
+.recipe-container h3,
+.recipe-container h4,
+.recipe-container h5,
+.recipe-container h6 {
+  margin-top: 0;
+}
+
+.image-right {
+  float: right;
+  margin-left: 1rem;
+}
+
+footer hr {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.footer-credits {
+  text-align: center;
+  font-size: 0.9rem;
+}
