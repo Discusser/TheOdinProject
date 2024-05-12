@@ -21,7 +21,7 @@ html, body {
   flex-direction: row;
 }
 
-.flex.column {
+.column {
   flex-direction: column;
   width: 100px;
   height: 300px;
