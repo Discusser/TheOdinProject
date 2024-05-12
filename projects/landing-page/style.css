@@ -82,7 +82,7 @@ main > * {
 }
 
 .intro-button,
-.cta-container {
+.cta {
   background-color: #3882f6;
 }
 
@@ -132,8 +132,8 @@ main > * {
 }
 
 .images-container {
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 96px;
+  padding-bottom: 96px;
 }
 
 .images-title {
@@ -171,10 +171,50 @@ main > * {
 .quote-container {
   background-color: #e5e7eb;
   color: #1f2937;
+  padding-top: 96px;
+  padding-bottom: 96px;
 }
 
 .quote-body {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 300;
   font-style: italic;
+}
+
+.quote-author {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: end;
+}
+
+.cta-container {
+  padding: 96px 10%;
+}
+
+.cta {
+  padding: 64px;
+  border-radius: 12px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.cta-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cta-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.cta-button {
+    border: 2px solid white;
+    border-radius: 4px;
+    padding: 2px 24px;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    color: #e5e7eb;
 }
