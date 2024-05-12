@@ -1,0 +1,55 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: white;
+  color: #e5e7eb;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+.intro-container,
+footer {
+  background-color: #1f2937;
+}
+
+.intro-title,
+.header-logo {
+  color: #f9faf8;
+}
+
+.header-logo {
+  font-size: 24px;
+}
+
+.images-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.intro-button,
+.cta-container {
+  background-color: #3882f6;
+}
+
+.quote-container {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.quote-body {
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+}
