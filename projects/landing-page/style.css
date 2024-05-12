@@ -43,6 +43,11 @@ header {
   align-items: center;
 }
 
+header a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
 .header-left,
 .header-right {
   display: flex;
@@ -99,8 +104,10 @@ main > * {
 
 .intro-img {
   background-color: #eee;
-
+  width: 300px;
+  height: auto;
   flex: 1;
+  border-radius: 8px;
 }
 
 .intro-title {
