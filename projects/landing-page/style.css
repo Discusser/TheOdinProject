@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 *,
@@ -37,7 +38,7 @@ footer {
 
 header {
   padding-top: 24px;
-  padding-bottom: 48px;
+  padding-bottom: 24px;
   display: flex;
   align-items: center;
 }
@@ -56,6 +57,7 @@ header {
 .header-logo {
   margin-right: auto;
   font-size: 24px;
+  font-weight: bold;
 }
 
 .intro-title,
@@ -79,15 +81,47 @@ main > * {
   background-color: #3882f6;
 }
 
+.intro-container {
+  padding-top: 64px;
+  padding-bottom: 96px;
+
+  display: flex;
+  gap: 32px;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.intro-img {
+  background-color: #eee;
+
+  flex: 1;
+}
+
 .intro-title {
   font-size: 48px;
   font-weight: 900;
   color: #f9faf8;
 }
 
-.intro-subtext {
+.intro-subtext,
+.header-right {
   font-size: 18px;
   color: #e5e7eb;
+}
+
+.intro-button {
+  padding: 8px 24px;
+  border: 0;
+  border-radius: 8px;
+  color: #f9faf8;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .images-title {
