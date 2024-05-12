@@ -218,3 +218,9 @@ main > * {
     font-weight: bold;
     color: #e5e7eb;
 }
+
+footer {
+    padding: 32px;
+    font-size: 18px;
+    text-align: center;
+}
