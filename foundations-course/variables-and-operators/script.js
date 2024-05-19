@@ -1,14 +1,14 @@
-// javascript.info Task 1
-// let admin;
-// let name;
-// name = "John";
-// admin = name;
-// alert(admin);
+console.log(23 + 97)
+2 + 3 + 1 + 4 + 5 + 6;
+console.log((4 + 6 + 9) / 77)
 
-// javascript.info Task 2
-// let ourPlanetName = "Earth";
-// let currentUserName;
+let a = 10;
+console.log(a);
+9 * a;
+let b = 7 * a;
+console.log(b);
 
-// javascript.info Task 3
-// const BIRTHDAY = '18.04.1982';
-// const age = someCode(BIRTHDAY);
+let MAX = 57;
+let actual = MAX - 13;
+let percentage = actual / MAX;
+console.log(percentage);
