@@ -24,3 +24,30 @@ const container = document.querySelector("#container");
   box.append(header, paragraph);
   container.append(box);
 }
+
+function alertFunction() {
+  alert("You did it!");
+}
+
+{
+  const btn = document.querySelector("#btn");
+  // btn.onclick = () => alert("Hello World");
+  btn.addEventListener("click", (e) => {
+    e.target.style.background = "blue";
+  });
+}
+
+{
+  const btn = document.querySelector("#btn1");
+  // btn.onclick = alertFunction;
+  btn.addEventListener("click", alertFunction);
+}
+
+{
+  const buttons = document.querySelectorAll("#container button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      alert(button.id);
+    });
+  });
+}
