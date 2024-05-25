@@ -2,10 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <script src="script.js"></script>
+        <script src="script.js" defer></script>
         <title>Rock Paper Scissors</title>
     </head>
     <body>
-        
+        <span>Selection:</span>
+        <button id="rock" class="selection-button">Rock</button>
+        <button id="paper" class="selection-button">Paper</button>
+        <button id="scissors" class="selection-button">Scissors</button>
+        <p>Round outcome: <span id="roundOutcome"></span></p>
+        <p>Running score: <span id="humanScore">0</span> - <span id="computerScore">0</span> (You vs Computer)</p>
+        <p id="winnerMessage"></p>
     </body>
 </html>
