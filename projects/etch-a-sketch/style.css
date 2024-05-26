@@ -12,7 +12,7 @@ html {
   box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
-  width: calc(32px * 16);
+  width: 960px;
   border: 4px solid black;
 }
 
@@ -22,4 +22,8 @@ html {
   height: 32px;
   border: 1px solid black;
   border-collapse: collapse;
+}
+
+.colored-background {
+    background-color: cornflowerblue;
 }
