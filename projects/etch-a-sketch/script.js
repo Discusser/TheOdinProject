@@ -29,13 +29,25 @@ function createGrid(squaresPerLine) {
             div.style.width = `${size}px`;
             div.style.height = `${size}px`;
 
-            div.addEventListener("mouseenter", () => {
-                div.classList.add("colored-background");
-            })
+            div.addEventListener("mouseenter", () => handleDivMouseEnter(div));
 
             container.append(div);
         }
     }
+}
+
+function generateCSSColor() {
+    function randomChannel() {
+        return Math.random() * 255;
+    }
+
+    return `rgb(${randomChannel()}, ${randomChannel()}, ${randomChannel()})`;
+}
+
+function handleDivMouseEnter(div) {
+    const color = generateCSSColor();
+
+    div.style.backgroundColor = color;
 }
 
 // Default grid
