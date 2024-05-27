@@ -1,0 +1,53 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+#calculatorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  height: 600px;
+  width: 400px;
+  border: 3px solid rgb(30, 30, 30);
+  background-color: rgb(203, 203, 203);
+  padding: 1em;
+}
+
+#displayContainer {
+  border: 2px solid rgb(30, 30, 30);
+  background-color: rgb(239, 239, 239);
+  padding: 0 0.75em;
+  height: 8lh;
+  text-align: right;
+}
+
+#displayContainer p {
+  margin: 8px;
+}
+
+#buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#buttonsRow {
+  display: flex;
+  flex-grow: 1;
+}
+
+#buttonsContainer,
+#buttonsRow {
+  gap: 0.25em;
+}
+
+#buttonsRow button {
+  width: 25%;
+}
