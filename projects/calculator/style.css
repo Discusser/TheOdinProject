@@ -11,9 +11,9 @@ html {
 #calculatorContainer {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.75em;
 
-  height: 600px;
+  height: 400px;
   width: 400px;
   border: 3px solid rgb(30, 30, 30);
   background-color: rgb(203, 203, 203);
@@ -24,8 +24,9 @@ html {
   border: 2px solid rgb(30, 30, 30);
   background-color: rgb(239, 239, 239);
   padding: 0 0.75em;
-  height: 8lh;
+  height: 6lh;
   text-align: right;
+  overflow: hidden;
 }
 
 #displayContainer p {
@@ -50,4 +51,5 @@ html {
 
 #buttonsRow button {
   width: 25%;
+  font-size: 120%;
 }
