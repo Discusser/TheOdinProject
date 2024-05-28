@@ -8,6 +8,17 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  margin: 0;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #calculatorContainer {
   display: flex;
   flex-direction: column;
@@ -18,6 +29,7 @@ html {
   border: 3px solid rgb(30, 30, 30);
   background-color: rgb(203, 203, 203);
   padding: 1em;
+  margin: auto;
 }
 
 #displayContainer {
@@ -52,4 +64,16 @@ html {
 #buttonsRow button {
   width: 25%;
   font-size: 120%;
+}
+
+.digitButton {
+  background-color: aliceblue;
+}
+
+.operatorButton {
+  background-color: grey;
+}
+
+#equalsButton {
+  background-color: deepskyblue;
 }
