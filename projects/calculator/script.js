@@ -18,10 +18,13 @@ const operation = {
 
 function operatorToFunction(string) {
   switch (string) {
+    case "/":
     case "÷":
       return divide;
+    case "*":
     case "×":
       return multiply;
+    case "-":
     case "−":
       return subtract;
     case "+":
@@ -30,19 +33,26 @@ function operatorToFunction(string) {
 }
 
 function tryOperate(operation, force = true) {
-  let condition = operation.lhs !== null && operation.operator !== null;
-  if (!force) {
-    condition = condition && operation.rhs !== null;
-  } else if (force && operation.rhs === null) {
-    operation.rhs = operation.lhs;
-  }
+  let condition = operation.lhs !== null && operation.operator !== null && operation.rhs !== null;
+
+  // if (!force) {
+  //   condition = condition && operation.rhs !== null;
+  // }
 
   if (condition) {
-    if (operation.rhs === 0 && operation.operator === "÷") alert("Don't divide by zero!!");
+    // if (force && operation.rhs === null) {
+    //   operation.rhs = operation.lhs;
+    // }
 
     operation.lhs = Number(
       operate(Number(operation.lhs), Number(operation.rhs), operatorToFunction(operation.operator)).toFixed(10)
     );
+
+    if (operation.rhs == 0 && operation.operator === "÷") {
+      alert("Don't divide by zero!!");
+      operation.lhs = NaN;
+    }
+
     operation.operator = null;
     operation.rhs = null;
 
@@ -60,41 +70,52 @@ function operationToString(operation) {
   return string;
 }
 
-buttonsContainer.querySelectorAll(".digitButton, .operatorButton").forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.classList.contains("digitButton")) {
-      // Update operation.lhs or operation.rhs variable when user clicks on any of the digit buttons
-      if (operation.operator === null) {
-        if (operation.lhs === null) operation.lhs = "";
-        if ((button.textContent === "." && !operation.lhs.includes(".")) || button.textContent !== ".")
-          operation.lhs += button.textContent;
-      } else {
-        if (operation.rhs === null) operation.rhs = "";
-        if ((button.textContent === "." && !operation.rhs.includes(".")) || button.textContent !== ".")
-          operation.rhs += button.textContent;
-      }
-    } else if (button.classList.contains("operatorButton")) {
-      // Try performing an operation if the user clicks on an operator button (only if we already have something like 1 + )
-      if (operation.operator !== null) {
-        const result = tryOperate(operation);
-        if (result !== null) {
-          displayContainer.textContent = result;
-        }
-      }
+function onDigitClick(digit) {
+  // Update operation.lhs or operation.rhs variable when user clicks on any of the digit buttons
+  if (operation.operator === null) {
+    if (operation.lhs === null) operation.lhs = "";
+    if ((digit === "." && !operation.lhs.includes(".")) || digit !== ".") operation.lhs += digit;
+  } else {
+    if (operation.rhs === null) operation.rhs = "";
+    if ((digit === "." && !operation.rhs.includes(".")) || digit !== ".") operation.rhs += digit;
+  }
 
-      operation.operator = button.textContent;
+  displayContainer.textContent = operationToString(operation);
+}
+
+function onOperatorClick(operator) {
+  // Try performing an operation if the user clicks on an operator button (only if we already have something like 1 + )
+  if (operation.operator !== null) {
+    const result = tryOperate(operation);
+    if (result !== null) {
+      displayContainer.textContent = result;
     }
+  }
 
-    displayContainer.textContent = operationToString(operation);
-  });
-});
+  operation.operator = operator;
+  displayContainer.textContent = operationToString(operation);
+}
 
-document.querySelector("#equalsButton").addEventListener("click", () => {
+function onEqualsClick() {
   // Forcefully perform an operation
   const result = tryOperate(operation, true);
   if (result !== null) {
     displayContainer.textContent = result;
   }
+}
+
+buttonsContainer.querySelectorAll(".digitButton, .operatorButton").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.classList.contains("digitButton")) {
+      onDigitClick(button.textContent);
+    } else if (button.classList.contains("operatorButton")) {
+      onOperatorClick(button.textContent);
+    }
+  });
+});
+
+document.querySelector("#equalsButton").addEventListener("click", () => {
+  onEqualsClick();
 });
 
 document.querySelector("#clearButton").addEventListener("click", () => {
@@ -102,4 +123,14 @@ document.querySelector("#clearButton").addEventListener("click", () => {
   operation.lhs = null;
   operation.operator = null;
   operation.rhs = null;
+});
+
+document.addEventListener("keydown", (event) => {
+  if ("1234567890.".includes(event.key)) {
+    onDigitClick(event.key);
+  } else if ("/*-+".includes(event.key)) {
+    onOperatorClick(event.key);
+  } else if (event.key === "Enter") {
+    onEqualsClick();
+  }
 });
