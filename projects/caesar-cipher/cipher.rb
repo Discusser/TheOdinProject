@@ -1,5 +1,5 @@
 def caesar_cipher(string, shift_factor)
-  string.split("").map do |character|
+  string.chars.map do |character|
     shifted_ordinal = character.ord
 
     lowercase = ("a".."z").include?(character)
@@ -10,7 +10,7 @@ def caesar_cipher(string, shift_factor)
     end
 
     shifted_ordinal.chr
-  end.join("")
+  end.join
 end
 
 p caesar_cipher("What a string!", 5)
