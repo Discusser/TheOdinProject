@@ -35,7 +35,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  rainbow (~> 3.1)
   rubocop (~> 1.64)
 
 BUNDLED WITH
