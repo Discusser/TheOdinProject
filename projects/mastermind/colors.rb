@@ -1,5 +1,6 @@
 module Colors
   INDEX_TO_STRING = {
+    -1 => "  ",
     0 => "🔴",
     1 => "🟢",
     2 => "🔵",
