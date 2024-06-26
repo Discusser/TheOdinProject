@@ -1,11 +1,12 @@
 require_relative "colors"
+require_relative "guess"
 
 class Board
   def initialize(rows, columns)
     @rows = rows
     @columns = columns
     @current_row = rows - 1
-    @board = Array.new(rows) { Array.new(columns, -1) }
+    @board = Array.new(rows) { Guess.new(nil, nil) }
     @guess_informations = Array.new(rows)
   end
 
@@ -28,18 +29,21 @@ class Board
   end
 
   def display_row(index)
-    print "[#{Colors.indices_to_strings(@board[index]).join}]"
-    unless @guess_informations[index].nil?
-      print "\t#{@guess_informations[index]&.correct_pos_and_color}🔴"
-      print "\t#{@guess_informations[index]&.correct_color}⚪"
+    print "[#{@board[index]}]"
+    if @board[index].valid_colors?
+      print "\t#{@board[index]&.correct_pos_and_color}🔴"
+      print "\t#{@board[index]&.correct_color}⚪"
     end
     puts
   end
 
-  def add_guess(guess, guess_information)
+  def add_guess(guess)
     @board[@current_row] = guess
-    @guess_informations[@current_row] = guess_information
     @current_row = [0, @current_row - 1].max
+  end
+
+  def previous_guesses
+    @board[@current_row + 1..]
   end
 
   def make_color_choices
