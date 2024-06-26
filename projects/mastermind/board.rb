@@ -11,6 +11,7 @@ class Board
   end
 
   def display(secret_code)
+    puts
     color_choices = make_color_choices
     display_secret_code(secret_code, color_choices)
     puts "#{'-' * ((@columns * 2) + 2)}\t#{color_choices[1]}"

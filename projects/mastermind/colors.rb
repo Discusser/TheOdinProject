@@ -17,4 +17,13 @@ module Colors
   def self.indices_to_strings(indices)
     indices.map { |index| COLORS[index] }
   end
+
+  def self.string_to_indices(string, columns)
+    indices = string.split.map { |e| e.to_i - 1 }
+    return nil if indices.length != columns || !indices.all? do |e|
+                    Colors.index_valid?(e)
+                  end || indices.uniq.length != indices.length
+
+    indices
+  end
 end

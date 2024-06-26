@@ -10,16 +10,16 @@ class Mastermind
 
   def initialize(player)
     @board = Board.new(ROWS, COLUMNS)
-    @secret_code = (0...Colors::COLORS.length).to_a.sample(COLUMNS)
     @moves_played = 0
     @player = player
+    @secret_code = @player.make_secret_code(@board.make_color_choices, COLUMNS)
     p @secret_code
     puts Colors.indices_to_strings(@secret_code).join
     next_move
   end
 
   def next_move
-    @board.display(nil)
+    @board.display(nil) unless @player.is_a? ComputerPlayer
     guess = Guess.new(@player.wait_for_guess(@board.previous_guesses, COLUMNS), @secret_code)
     @board.add_guess(guess)
 
@@ -40,12 +40,12 @@ class Mastermind
 
   def win_game
     @board.display(@secret_code)
-    puts "You won in #{@moves_played} moves!"
+    @player.win_message(@moves_played)
   end
 
   def lose_game
     @board.display(@secret_code)
-    puts "You lost! Better luck next time!"
+    @player.lose_message
   end
 end
 
