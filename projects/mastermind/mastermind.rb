@@ -12,8 +12,12 @@ class Mastermind
     @moves_played = 0
     @player = player
     @secret_code = @player.make_secret_code(@board.make_color_choices, COLUMNS)
-    p @secret_code
-    puts Colors.indices_to_strings(@secret_code).join
+
+    if ARGV.include?("--debug")
+      p @secret_code
+      puts Colors.indices_to_strings(@secret_code).join
+    end
+
     next_move
   end
 
