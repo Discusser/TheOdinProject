@@ -7,7 +7,6 @@ class Board
     @columns = columns
     @current_row = rows - 1
     @board = Array.new(rows) { Guess.new(nil, nil) }
-    @guess_informations = Array.new(rows)
   end
 
   def display(secret_code)
