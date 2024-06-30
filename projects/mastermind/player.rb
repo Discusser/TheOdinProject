@@ -1,7 +1,13 @@
 require_relative "colors"
+require_relative "strategy"
 
 module Player
-  def wait_for_guess(previous_guesses, columns) end
+  attr_reader :strategy
+
+  def wait_for_guess(previous_guesses, columns)
+    @strategy.make_guess(previous_guesses, columns)
+  end
+
   def win_message(moves) end
   def lose_message() end
   def make_secret_code(color_choices, length) end
@@ -9,15 +15,9 @@ end
 
 class HumanPlayer
   include Player
-  def wait_for_guess(_previous_guesses, columns)
-    guess = []
-    loop do
-      print "Make a guess with #{columns} unique space separated digits: "
-      next if (guess = Colors.string_to_indices(gets.chomp, columns)).nil?
 
-      break
-    end
-    guess
+  def initialize(strategy = Strategy::Manual.new)
+    @strategy = strategy
   end
 
   def win_message(moves)
@@ -35,8 +35,9 @@ end
 
 class ComputerPlayer
   include Player
-  def wait_for_guess(_previous_guesses, columns)
-    (0..7).to_a.sample(columns)
+
+  def initialize(strategy = Strategy::Random.new)
+    @strategy = strategy
   end
 
   def win_message(moves)

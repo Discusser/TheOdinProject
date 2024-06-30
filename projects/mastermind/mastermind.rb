@@ -3,7 +3,6 @@ require_relative "board"
 require_relative "guess"
 require_relative "player"
 
-# TODO: let computer guess the player's secret code
 class Mastermind
   ROWS = 12
   COLUMNS = 4
