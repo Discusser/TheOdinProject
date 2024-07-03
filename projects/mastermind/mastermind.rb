@@ -54,13 +54,21 @@ end
 
 player = nil
 loop do
-  print "Would you like to guess a secret code (1) or make the computer guess a code (2)? "
+  print "Would you like to:
+  \tguess a secret code (1),
+  \tmake the computer guess a code (2), or
+  \tmake the computer guess a random code (3)? "
   answer = gets.chomp.to_i
-  if answer == 1
+  case answer
+  when 1
     player = HumanPlayer.new
     break
-  elsif answer == 2
-    player = ComputerPlayer.new
+  when 2
+    player = ComputerPlayer.new(Strategy::Swaszek.new(Mastermind::COLUMNS))
+    break
+  when 3
+    player = ComputerPlayer.new(Strategy::Swaszek.new(Mastermind::COLUMNS))
+    player.make_random_code = true
     break
   end
 end

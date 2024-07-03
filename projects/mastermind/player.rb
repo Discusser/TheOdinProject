@@ -35,9 +35,11 @@ end
 
 class ComputerPlayer
   include Player
+  attr_accessor :make_random_code
 
   def initialize(strategy = Strategy::Random.new)
     @strategy = strategy
+    @make_random_code = false
   end
 
   def win_message(moves)
@@ -49,6 +51,8 @@ class ComputerPlayer
   end
 
   def make_secret_code(color_choices, length)
+    return (0...Colors::COLORS.length).to_a.sample(length) if make_random_code
+
     puts color_choices
     secret_code = []
     loop do
