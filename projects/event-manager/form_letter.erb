@@ -5,6 +5,9 @@
   <body>
     <h1>Thanks <%= name %>!</h1>
     <p>Thanks for coming to our conference. We couldn't have done it without you!</p>
+    <% unless phone_number.nil? %>
+    <p>Sign up for mobile alerts for your phone number: <a href="tel:<%= phone_number %>"><%= phone_number %></a></p>
+    <% end %>
     <p>
       Political activism is at the heart of any democracy and your voice needs to be heard. Please consider reaching out
       to your following representatives:
@@ -23,5 +26,6 @@
         <td><%= legislators %></td>
       <% end %>
     </table>
+    <p><small>You registered at <%= "#{registration_date.strftime("%R %D")} (day #{registration_date.wday} of the week)" %> <small></p>
   </body>
 </html>
