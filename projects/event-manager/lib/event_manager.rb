@@ -45,9 +45,9 @@ end
 
 puts "Event Manager initialized!"
 
-contents = CSV.open("event_attendees.csv", headers: true, header_converters: :symbol)
+contents = CSV.open("data/event_attendees.csv", headers: true, header_converters: :symbol)
 
-template_letter = File.read("form_letter.erb")
+template_letter = File.read("data/form_letter.erb")
 erb_template = ERB.new(template_letter)
 
 contents.each do |row|
