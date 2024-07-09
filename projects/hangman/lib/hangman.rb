@@ -18,11 +18,15 @@ class Hangman
   end
 
   def save_game
-    p JSON.dump({
-                  selected_word: @selected_word,
-                  guesses_left: @guesses_left,
-                  letters_guessed: @letters_guessed
-                })
+    json = JSON.dump({
+                       selected_word: @selected_word,
+                       guesses_left: @guesses_left,
+                       letters_guessed: @letters_guessed
+                     })
+    print "Enter a name for your save file: "
+    filename = gets.chomp
+    File.write("saves/#{filename}.json", json)
+
     exit(0)
   end
 
@@ -67,7 +71,47 @@ class Hangman
     wait_for_input
   end
 
+  def list_saves
+    available_saves = Dir.children("saves").select do |file|
+      File.file?(File.join("saves", file)) && file.end_with?(".json")
+    end
+    available_saves.map { |file| file.split(".").first }
+  end
+
+  def prompt_for_save_to_load
+    available_saves = list_saves.join(", ")
+    loop do
+      print "Which save would you like to load? (#{available_saves}): "
+      input = "#{gets.chomp}.json"
+      path = File.join("saves", input)
+      next unless File.exist?(path)
+
+      return load_save(path)
+    end
+  end
+
+  def load_save(path)
+    data = JSON.parse(File.read(path))
+    p data
+    @selected_word = data["selected_word"]
+    @guesses_left = data["guesses_left"]
+    @letters_guessed = data["letters_guessed"]
+  end
+
+  def try_load_save
+    print "Would you like to load a save? (y/n) "
+    loop do
+      input = gets.chomp
+      return if input == "n"
+      break if input == "y"
+    end
+
+    prompt_for_save_to_load
+  end
+
   def start_game
+    try_load_save
+
     while @guesses_left.positive?
       next_guess
 
