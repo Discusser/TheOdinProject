@@ -53,13 +53,19 @@ class LinkedList
     size = self.size
     return if size.zero?
 
-    second_to_last = at(size - 2)
-    @tail = second_to_last
-    second_to_last.next_node = nil
+    if size == 1
+      @head = nil
+      @tail = @head
+    else
+      second_to_last = at(size - 2)
+      @tail = second_to_last
+      second_to_last.next_node = nil
+    end
   end
 
   def shift
     @head = @head.next_node
+    @tail = @head if @head.nil?
   end
 
   def contains?(value)
@@ -72,16 +78,26 @@ class LinkedList
     false
   end
 
-  def find(value)
+  def find(value = nil)
     i = 0
     current = @head
     until current.nil?
-      return i if current.value == value
+      return i if block_given? ? yield(current.value) : current.value == value
 
       current = current.next_node
       i += 1
     end
     nil
+  end
+
+  def select
+    selected = []
+    current = @head
+    until current.nil?
+      selected << current if yield(current.value)
+      current = current.next_node
+    end
+    selected
   end
 
   def to_s
@@ -113,12 +129,22 @@ class LinkedList
   def remove_at(index)
     size = self.size
     return if index >= size
-    return pop if index == size - 1
     return shift if index == 0
+    return pop if index == size - 1
 
     before = at(index - 1)
     after = at(index + 1)
     before.next_node = after
+  end
+
+  def to_a
+    array = []
+    current = @head
+    until current.nil?
+      array << current.value
+      current = current.next_node
+    end
+    array
   end
 end
 
