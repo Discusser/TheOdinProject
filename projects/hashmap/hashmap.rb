@@ -1,12 +1,13 @@
 require_relative "../linked-list/linked_list"
 require_relative "entry"
 
-class HashMap
+class HashStructure
   attr_reader :buckets, :load_factor
 
-  def initialize
+  def initialize(entry_class)
     @buckets = Array.new(16) { nil }
     @load_factor = 0.75
+    @entry_class = entry_class
   end
 
   def hash(key)
@@ -24,7 +25,7 @@ class HashMap
     index = key_to_index(key)
     @buckets[index] = LinkedList.new if @buckets[index].nil?
     remove(key) if has?(key)
-    @buckets[index].append(Entry.new(key, value))
+    @buckets[index].append(@entry_class.new(key, value))
   end
 
   def get(key)
@@ -45,9 +46,9 @@ class HashMap
     return nil? unless has?(key)
 
     bucket = @buckets[key_to_index(key)]
-    entry = get(key)
+    removed_entry = get(key)
     bucket.remove_at(bucket.find { |entry| entry.key == key })
-    entry
+    removed_entry
   end
 
   def length
@@ -59,15 +60,15 @@ class HashMap
   end
 
   def keys
-    entries.map { |entry| entry.key }
+    entries.map(&:key)
   end
 
   def values
-    entries.map { |entry| entry.value }
+    entries.map(&:value)
   end
 
   def entries
-    @buckets.compact.map { |list| list.to_a }.flatten
+    @buckets.compact.map(&:to_a).flatten
   end
 
   private
@@ -83,7 +84,19 @@ class HashMap
   end
 end
 
-test = HashMap.new
+class HashMap < HashStructure
+  def initialize
+    super(Entry)
+  end
+end
+
+class HashSet < HashStructure
+  def initialize
+    super(KeyEntry)
+  end
+end
+
+test = HashSet.new
 test.set("apple", "red")
 test.set("banana", "yellow")
 test.set("carrot", "orange")

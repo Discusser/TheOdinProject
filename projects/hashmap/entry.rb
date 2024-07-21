@@ -14,3 +14,21 @@ class Entry
     "[ #{key}, #{value} ]"
   end
 end
+
+class KeyEntry < Entry
+  def initialize(key, _)
+    super(key, key)
+  end
+
+  def to_a
+    [key]
+  end
+
+  def to_s
+    "[ #{key} ]"
+  end
+
+  def value
+    key
+  end
+end
