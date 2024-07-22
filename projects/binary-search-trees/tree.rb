@@ -68,14 +68,38 @@ class Tree
     delete_node(find(value))
   end
 
-  def inorder(root = @root)
+  def preorder(root = @root, &block)
     return [] if root.nil?
 
     visited = []
 
-    visited.concat(inorder(root.left))
-    visited << root
-    visited.concat(inorder(root.right))
+    block_given? ? yield(root) : visited << root
+    visited.concat(preorder(root.left, &block))
+    visited.concat(preorder(root.right, &block))
+
+    visited
+  end
+
+  def inorder(root = @root, &block)
+    return [] if root.nil?
+
+    visited = []
+
+    visited.concat(inorder(root.left, &block))
+    block_given? ? yield(root) : visited << root
+    visited.concat(inorder(root.right, &block))
+
+    visited
+  end
+
+  def postorder(root = @root, &block)
+    return [] if root.nil?
+
+    visited = []
+
+    visited.concat(postorder(root.left, &block))
+    visited.concat(postorder(root.right, &block))
+    block_given? ? yield(root) : visited << root
 
     visited
   end
@@ -121,10 +145,9 @@ end
 tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.insert(2)
 tree.pretty_print
-tree.level_order { |n| p n.data }
+tree.postorder { |n| p n.data }
 # tree.delete(4)
 # tree.delete(3)
 # tree.delete(8)
 # tree.delete(67)
 # tree.pretty_print
-p tree.inorder.map(&:data)
