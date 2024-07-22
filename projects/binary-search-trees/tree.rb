@@ -38,28 +38,13 @@ class Tree
 
     if node.leaf?
       # Handle leaf deletion
-      parent = find_parent(value)
-      if parent.left&.data == value
-        parent.left = nil
-      else
-        parent.right = nil
-      end
+      delete_leaf(node)
     elsif node.children.length == 1
       # Handle single child deletion
-      if node.left.nil?
-        node.from!(node.right)
-      elsif node.right.nil?
-        node.from!(node.left)
-      end
+      delete_single_child_node(node)
     else
       # Handle two child deletion
-      traversal = inorder { |n| n }
-      index = traversal.index(node)
-      # the biggest node will never have two children, so we know that the successor exists in a balanced tree
-      successor = traversal[index + 1]
-      temp = successor.data
-      delete_node(successor)
-      node.data = temp
+      delete_two_child_node(node)
     end
   end
 
@@ -149,20 +134,51 @@ class Tree
     end
   end
 
+  # rubocop:disable Style/OptionalBooleanParameter
   def pretty_print(node = @root, prefix = "", is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+  # rubocop:enable Style/OptionalBooleanParameter
+
+  private
+
+  def delete_leaf(node)
+    parent = find_parent(node.value)
+    if parent.left&.data == node.value
+      parent.left = nil
+    else
+      parent.right = nil
+    end
+  end
+
+  def delete_single_child_node(node)
+    if node.left.nil?
+      node.from!(node.right)
+    elsif node.right.nil?
+      node.from!(node.left)
+    end
+  end
+
+  def delete_two_child_node(node)
+    traversal = inorder { |n| n }
+    index = traversal.index(node)
+    # the biggest node will never have two children, so we know that the successor exists in a balanced tree
+    successor = traversal[index + 1]
+    temp = successor.data
+    delete_node(successor)
+    node.data = temp
   end
 end
 
 tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.insert(2)
 tree.pretty_print
-tree.inorder { |node| p "#{node.data} has depth #{tree.depth(node)}" }
+# tree.inorder { |node| p "#{node.data} has depth #{tree.depth(node)}" }
 # p tree.postorder
-# tree.delete(4)
-# tree.delete(3)
-# tree.delete(8)
-# tree.delete(67)
-# tree.pretty_print
+tree.delete(4)
+tree.delete(3)
+tree.delete(8)
+tree.delete(67)
+tree.pretty_print
