@@ -124,6 +124,12 @@ class Tree
     root if value == root.data
   end
 
+  def height(root = @root)
+    return 0 if root.nil? || root.leaf?
+
+    1 + [height(root.left), height(root.right)].max
+  end
+
   def level_order(root = @root)
     queue = [root]
 
@@ -145,6 +151,7 @@ end
 tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.insert(2)
 tree.pretty_print
+tree.inorder { |node| p "#{node.data} has height #{tree.height(node)}" }
 # p tree.postorder
 # tree.delete(4)
 # tree.delete(3)
