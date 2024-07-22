@@ -1,5 +1,6 @@
 require_relative "node"
 
+# rubocop:disable Metrics/ClassLength
 class Tree
   attr_reader :root
 
@@ -179,6 +180,7 @@ class Tree
     node.data = temp
   end
 end
+# rubocop:enable Metrics/ClassLength
 
 tree = Tree.new((Array.new(15) { rand(1..100) }))
 tree.insert(150)
