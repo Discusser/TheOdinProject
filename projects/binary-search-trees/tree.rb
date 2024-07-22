@@ -134,6 +134,14 @@ class Tree
     end
   end
 
+  def balanced?
+    (height(@root.left) - height(@root.right)).abs <= 1
+  end
+
+  def rebalance
+    @root = build_tree(inorder)
+  end
+
   # rubocop:disable Style/OptionalBooleanParameter
   def pretty_print(node = @root, prefix = "", is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
@@ -172,13 +180,12 @@ class Tree
   end
 end
 
-tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-tree.insert(2)
+tree = Tree.new((Array.new(15) { rand(1..100) }))
+tree.insert(150)
+tree.insert(135)
+tree.insert(195)
+tree.insert(180)
 tree.pretty_print
-# tree.inorder { |node| p "#{node.data} has depth #{tree.depth(node)}" }
-# p tree.postorder
-tree.delete(4)
-tree.delete(3)
-tree.delete(8)
-tree.delete(67)
+tree.rebalance
 tree.pretty_print
+p tree.balanced?
