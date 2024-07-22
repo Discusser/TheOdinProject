@@ -1,5 +1,4 @@
 class Node
-  include Comparable
   attr_accessor :data, :left, :right
 
   def initialize(data = nil, left = nil, right = nil)
@@ -8,7 +7,17 @@ class Node
     @right = right
   end
 
-  def value
-    @data
+  def from!(other)
+    @data = other.data
+    @left = other.left
+    @right = other.right
+  end
+
+  def leaf?
+    @left.nil? && @right.nil?
+  end
+
+  def children
+    [@left, @right].compact
   end
 end
