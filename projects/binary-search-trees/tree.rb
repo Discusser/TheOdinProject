@@ -53,7 +53,7 @@ class Tree
       end
     else
       # Handle two child deletion
-      traversal = inorder
+      traversal = inorder { |n| n }
       index = traversal.index(node)
       # the biggest node will never have two children, so we know that the successor exists in a balanced tree
       successor = traversal[index + 1]
@@ -73,7 +73,7 @@ class Tree
 
     visited = []
 
-    block_given? ? yield(root) : visited << root
+    visited << (block_given? ? yield(root) : root.data)
     visited.concat(preorder(root.left, &block))
     visited.concat(preorder(root.right, &block))
 
@@ -86,7 +86,7 @@ class Tree
     visited = []
 
     visited.concat(inorder(root.left, &block))
-    block_given? ? yield(root) : visited << root
+    visited << (block_given? ? yield(root) : root.data)
     visited.concat(inorder(root.right, &block))
 
     visited
@@ -99,7 +99,7 @@ class Tree
 
     visited.concat(postorder(root.left, &block))
     visited.concat(postorder(root.right, &block))
-    block_given? ? yield(root) : visited << root
+    visited << (block_given? ? yield(root) : root.data)
 
     visited
   end
@@ -145,7 +145,7 @@ end
 tree = Tree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
 tree.insert(2)
 tree.pretty_print
-tree.postorder { |n| p n.data }
+# p tree.postorder
 # tree.delete(4)
 # tree.delete(3)
 # tree.delete(8)
