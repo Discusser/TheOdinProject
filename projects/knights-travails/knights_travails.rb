@@ -1,3 +1,5 @@
+require_relative "directed_graph"
+
 ROWS = 8
 COLUMNS = ROWS
 
@@ -7,10 +9,6 @@ COLUMNS = ROWS
 # (x + 2; y - 1), (x + 2; y + 1)
 # (x - 2; y - 1), (x - 2; y + 1)
 
-def cell_index(pos)
-  pos[0] + (pos[1] * ROWS)
-end
-
 def pos_valid?(pos)
   pos[0].between?(0, COLUMNS) && pos[1].between?(0, ROWS)
 end
@@ -18,7 +16,7 @@ end
 def add_cell_to_adjacency_list(list, pos, pos_to_add)
   return unless pos_valid?(pos) && pos_valid?(pos_to_add)
 
-  list[cell_index(pos)] << cell_index(pos_to_add)
+  list[pos] = list[pos] << pos_to_add
 end
 
 def add_moves_to_adjacency_list(list, pos)
@@ -32,7 +30,7 @@ def add_moves_to_adjacency_list(list, pos)
 end
 
 def build_adjacency_list
-  adjacency_list = Array.new(ROWS * COLUMNS) { [] }
+  adjacency_list = Hash.new { [] }
 
   COLUMNS.times do |j|
     ROWS.times do |i|
@@ -43,11 +41,15 @@ def build_adjacency_list
   adjacency_list
 end
 
-def knight_moves(_starting_point, _destination)
-  # TODO: Implement
+def knight_moves(starting_point, destination)
   vertices = (0..63).to_a
   adjacency_list = build_adjacency_list
+
   graph = DirectedGraph.new(vertices, adjacency_list)
+  path = graph.find_shortest_path(starting_point, destination)
+  return if path.nil?
+
+  puts "You made it in #{path.length} moves! Here's your path: #{path}"
 end
 
-knight_moves([0, 0], [1, 2])
+knight_moves([0, 0], [7, 7])
