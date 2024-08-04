@@ -12,7 +12,7 @@ class HumanPlayer < Player
   def make_move
     print "Specify row and column to play, separated by a space: "
     response = gets.chomp.split.map(&:to_i)
-    make_move unless response.length == 2 && response.all? { |e| e.is_a?(Integer) && e.positive? }
+    return make_move unless response.length == 2 && response.all? { |e| e.is_a?(Integer) && e.positive? }
 
     response.map { |e| e - 1 }
   end

@@ -38,6 +38,8 @@ class Board
     false
   end
 
+  private
+
   def check_diagonal(char)
     (@board.dig(0, 0) == char && @board.dig(1, 1) == char && @board.dig(2, 2) == char) ||
       (@board.dig(2, 0) == char && @board.dig(1, 1) == char && @board.dig(0, 2) == char)
