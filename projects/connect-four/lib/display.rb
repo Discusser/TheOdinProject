@@ -16,9 +16,9 @@ class Display
 
   def print_row(index)
     row = @board.board[index]
-    print("| ")
+    print("|")
     row.each do |elem|
-      elem = "○ " if elem.empty?
+      elem = "⚫" if elem.empty?
       print(elem)
     end
     print("|")
